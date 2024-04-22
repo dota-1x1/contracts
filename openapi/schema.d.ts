@@ -162,9 +162,18 @@ export interface components {
       /** Format: date-time */
       info_uptated_at: Date;
     };
+    MatchCounter: {
+      win: number;
+      lose: number;
+      total: number;
+    };
     CountsPlayerEntity: {
-      wl: Record<string, never>;
-      game_mode: Record<string, never>;
+      wl: components["schemas"]["MatchCounter"];
+      game_mode: {
+        ALL_PICK?: components["schemas"]["MatchCounter"];
+        BALANCED_DRAFT?: components["schemas"]["MatchCounter"];
+        SF_ONLY?: components["schemas"]["MatchCounter"];
+      };
     };
     PlayerSelectData: {
       hero_id: number;
@@ -184,6 +193,14 @@ export interface components {
       game_mode: Record<string, never>;
       towers: Record<string, never>;
       players: components["schemas"]["PlayerSelectData"][];
+      /** Format: date-time */
+      created_at: Date;
+    };
+    HeroesPlayerEntity: {
+      hero_id: number;
+      win: number;
+      lose: number;
+      total: number;
     };
     MatchEntity: {
       /** Format: int64 */
@@ -198,6 +215,8 @@ export interface components {
       game_mode: Record<string, never>;
       towers: Record<string, never>;
       players?: components["schemas"]["PlayerMatchesEntity"][];
+      /** Format: date-time */
+      created_at: Date;
     };
     PlayerMatchesEntity: {
       Match?: components["schemas"]["MatchEntity"];
@@ -355,7 +374,7 @@ export interface operations {
     responses: {
       200: {
         content: {
-          "application/json": Record<string, never>[];
+          "application/json": components["schemas"]["HeroesPlayerEntity"][];
         };
       };
     };
