@@ -176,11 +176,21 @@ export interface components {
       };
     };
     PlayerSelectData: {
+      /** @enum {string} */
+      team: "RADIANT" | "DIRE";
+      /** Format: int64 */
+      account_id: number;
       hero_id: number;
       level: number;
       xp_total: number;
+      denies: number;
+      last_hits: number;
     };
     ShortMatchesEntity: {
+      /** @enum {string} */
+      win_trigger: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
+      /** @enum {string} */
+      game_mode: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
       /** Format: int64 */
       match_id: number;
       duration: number;
@@ -189,8 +199,6 @@ export interface components {
       radiant_win: boolean;
       server_version: number;
       region: number;
-      win_trigger: Record<string, never>;
-      game_mode: Record<string, never>;
       towers: Record<string, never>;
       players: components["schemas"]["PlayerSelectData"][];
       /** Format: date-time */
