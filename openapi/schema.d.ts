@@ -209,6 +209,8 @@ export interface components {
       win: number;
       lose: number;
       total: number;
+      /** Format: date-time */
+      last_match: Date;
     };
     MatchEntity: {
       /** Format: int64 */
