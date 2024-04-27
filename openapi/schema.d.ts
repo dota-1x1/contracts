@@ -150,6 +150,22 @@ export interface components {
           different: number;
         }[];
     };
+    MatchEntity: {
+      /** Format: int64 */
+      match_id: number;
+      duration: number;
+      radiant_score: number;
+      dire_score: number;
+      radiant_win: boolean;
+      server_version: number;
+      region: number;
+      win_trigger: Record<string, never>;
+      game_mode: Record<string, never>;
+      towers: Record<string, never>;
+      players?: components["schemas"]["PlayerMatchesEntity"][];
+      /** Format: date-time */
+      created_at: Date;
+    };
     PlayerEntity: {
       /** Format: int64 */
       account_id: number;
@@ -161,6 +177,61 @@ export interface components {
       profile_name: string | null;
       /** Format: date-time */
       info_uptated_at: Date;
+      PlayerMatches?: components["schemas"]["PlayerMatchesEntity"][];
+    };
+    PlayerMatchesEntity: {
+      Match?: components["schemas"]["MatchEntity"];
+      /** Format: int64 */
+      match_id: number;
+      Player?: components["schemas"]["PlayerEntity"];
+      /** Format: int64 */
+      account_id: number;
+      team: Record<string, never>;
+      rating_change: number;
+      hero_id: number;
+      hero_has_randomed: boolean;
+      item_0: number;
+      item_1: number;
+      item_2: number;
+      item_3: number;
+      item_4: number;
+      item_5: number;
+      item_neutral: number;
+      backpack_0: number;
+      backpack_1: number;
+      backpack_2: number;
+      aghanims_scepter: boolean;
+      aghanims_shard: boolean;
+      moon_shard: boolean;
+      started_items: Record<string, never>;
+      kills: number;
+      deaths: number;
+      assists: number;
+      leaver_status: number;
+      last_hits: number;
+      denies: number;
+      xp_per_min: number;
+      xp_total: number;
+      gold_per_min: number;
+      gold: number;
+      gold_spent_total: number;
+      gold_spent_support: number;
+      gold_spent_consumables: number;
+      gold_spent_items: number;
+      hero_damage: number;
+      tower_damage: number;
+      level: number;
+      obs_placed: number;
+      sen_placed: number;
+      rune_pickups: number;
+      ability_upgrades_arr: number[];
+      towers_killed: number;
+      roshans_killed: number;
+      net_worth: number;
+      gold_t: number[];
+      lh_t: number[];
+      dn_t: number[];
+      xp_t: number[];
     };
     MatchCounter: {
       win: number;
@@ -211,75 +282,6 @@ export interface components {
       total: number;
       /** Format: date-time */
       last_match: Date;
-    };
-    MatchEntity: {
-      /** Format: int64 */
-      match_id: number;
-      duration: number;
-      radiant_score: number;
-      dire_score: number;
-      radiant_win: boolean;
-      server_version: number;
-      region: number;
-      win_trigger: Record<string, never>;
-      game_mode: Record<string, never>;
-      towers: Record<string, never>;
-      players?: components["schemas"]["PlayerMatchesEntity"][];
-      /** Format: date-time */
-      created_at: Date;
-    };
-    PlayerMatchesEntity: {
-      Match?: components["schemas"]["MatchEntity"];
-      /** Format: int64 */
-      match_id: number;
-      /** Format: int64 */
-      account_id: number;
-      team: Record<string, never>;
-      rating_change: number;
-      hero_id: number;
-      hero_has_randomed: boolean;
-      item_0: number;
-      item_1: number;
-      item_2: number;
-      item_3: number;
-      item_4: number;
-      item_5: number;
-      item_neutral: number;
-      backpack_0: number;
-      backpack_1: number;
-      backpack_2: number;
-      aghanims_scepter: boolean;
-      aghanims_shard: boolean;
-      moon_shard: boolean;
-      started_items: Record<string, never>;
-      kills: number;
-      deaths: number;
-      assists: number;
-      leaver_status: number;
-      last_hits: number;
-      denies: number;
-      xp_per_min: number;
-      xp_total: number;
-      gold_per_min: number;
-      gold: number;
-      gold_spent_total: number;
-      gold_spent_support: number;
-      gold_spent_consumables: number;
-      gold_spent_items: number;
-      hero_damage: number;
-      tower_damage: number;
-      level: number;
-      obs_placed: number;
-      sen_placed: number;
-      rune_pickups: number;
-      ability_upgrades_arr: number[];
-      towers_killed: number;
-      roshans_killed: number;
-      net_worth: number;
-      gold_t: number[];
-      lh_t: number[];
-      dn_t: number[];
-      xp_t: number[];
     };
     PlayersRankDto: {
       ids: number[];
