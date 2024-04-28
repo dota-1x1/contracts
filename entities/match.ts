@@ -5,6 +5,12 @@ import {
   DotaWinTriggerSchema,
 } from '../dota';
 
+export const TowersSchema = z.object({
+  radiant: DotaTowerSchema,
+  dire: DotaTowerSchema,
+});
+export type TowersType = z.infer<typeof TowersSchema>;
+
 // prettier-ignore
 export const MatchCreateSchema = z.object({
   match_id:         z.number().or(z.bigint()),
@@ -17,10 +23,7 @@ export const MatchCreateSchema = z.object({
   win_trigger:      DotaWinTriggerSchema,
   game_mode:        DotaGameModeSchema,
   //
-  towers: z.object({
-    radiant: DotaTowerSchema,
-    dire: DotaTowerSchema,
-  }),
+  towers: TowersSchema,
 });
 
 export type MatchCreateType = z.infer<typeof MatchCreateSchema>;

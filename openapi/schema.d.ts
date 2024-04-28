@@ -169,7 +169,7 @@ export interface components {
       /** @enum {string} */
       game_mode: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
       towers: Record<string, never>;
-      players: components["schemas"]["PlayerMatchesEntity"][][];
+      players?: components["schemas"]["PlayerMatchesEntity"][];
       /** Format: date-time */
       created_at: Date;
     };
