@@ -153,22 +153,30 @@ export interface components {
     MatchEntity: {
       /** Format: int64 */
       match_id: number;
+      /** Format: int32 */
       duration: number;
+      /** Format: int32 */
       radiant_score: number;
+      /** Format: int32 */
       dire_score: number;
       radiant_win: boolean;
+      /** Format: int32 */
       server_version: number;
+      /** Format: int32 */
       region: number;
-      win_trigger: Record<string, never>;
-      game_mode: Record<string, never>;
+      /** @enum {string} */
+      win_trigger: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
+      /** @enum {string} */
+      game_mode: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
       towers: Record<string, never>;
-      players?: components["schemas"]["PlayerMatchesEntity"][];
+      players: components["schemas"]["PlayerMatchesEntity"][][];
       /** Format: date-time */
       created_at: Date;
     };
     PlayerEntity: {
       /** Format: int64 */
       account_id: number;
+      /** Format: int32 */
       rating: number;
       avatar_full: string | null;
       avatar_medium: string | null;
@@ -177,7 +185,7 @@ export interface components {
       profile_name: string | null;
       /** Format: date-time */
       info_uptated_at: Date;
-      PlayerMatches?: components["schemas"]["PlayerMatchesEntity"][];
+      PlayerMatches: components["schemas"]["PlayerMatchesEntity"][][];
     };
     PlayerMatchesEntity: {
       Match?: components["schemas"]["MatchEntity"];
@@ -186,47 +194,83 @@ export interface components {
       Player?: components["schemas"]["PlayerEntity"];
       /** Format: int64 */
       account_id: number;
-      team: Record<string, never>;
+      /** @enum {string} */
+      team: "RADIANT" | "DIRE";
+      /** Format: int32 */
       rating_change: number;
+      /** Format: int32 */
       hero_id: number;
       hero_has_randomed: boolean;
+      /** Format: int32 */
       item_0: number;
+      /** Format: int32 */
       item_1: number;
+      /** Format: int32 */
       item_2: number;
+      /** Format: int32 */
       item_3: number;
+      /** Format: int32 */
       item_4: number;
+      /** Format: int32 */
       item_5: number;
+      /** Format: int32 */
       item_neutral: number;
+      /** Format: int32 */
       backpack_0: number;
+      /** Format: int32 */
       backpack_1: number;
+      /** Format: int32 */
       backpack_2: number;
       aghanims_scepter: boolean;
       aghanims_shard: boolean;
       moon_shard: boolean;
       started_items: Record<string, never>;
+      /** Format: int32 */
       kills: number;
+      /** Format: int32 */
       deaths: number;
+      /** Format: int32 */
       assists: number;
+      /** Format: int32 */
       leaver_status: number;
+      /** Format: int32 */
       last_hits: number;
+      /** Format: int32 */
       denies: number;
+      /** Format: int32 */
       xp_per_min: number;
+      /** Format: int32 */
       xp_total: number;
+      /** Format: int32 */
       gold_per_min: number;
+      /** Format: int32 */
       gold: number;
+      /** Format: int32 */
       gold_spent_total: number;
+      /** Format: int32 */
       gold_spent_support: number;
+      /** Format: int32 */
       gold_spent_consumables: number;
+      /** Format: int32 */
       gold_spent_items: number;
+      /** Format: int32 */
       hero_damage: number;
+      /** Format: int32 */
       tower_damage: number;
+      /** Format: int32 */
       level: number;
+      /** Format: int32 */
       obs_placed: number;
+      /** Format: int32 */
       sen_placed: number;
+      /** Format: int32 */
       rune_pickups: number;
       ability_upgrades_arr: number[];
+      /** Format: int32 */
       towers_killed: number;
+      /** Format: int32 */
       roshans_killed: number;
+      /** Format: int32 */
       net_worth: number;
       gold_t: number[];
       lh_t: number[];
