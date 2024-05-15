@@ -68,6 +68,7 @@ export interface components {
         radiant_win: boolean;
         server_version: number;
         region: number;
+        is_party: boolean;
         /** @enum {string} */
         win_trigger: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
         /** @enum {string} */
@@ -168,6 +169,7 @@ export interface components {
       win_trigger: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
       /** @enum {string} */
       game_mode: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
+      is_party: boolean;
       towers: Record<string, never>;
       players?: components["schemas"]["PlayerMatchesEntity"][];
       /** Format: date-time */
@@ -318,6 +320,7 @@ export interface components {
       players: components["schemas"]["PlayerSelectData"][];
       /** Format: date-time */
       created_at: Date;
+      is_party: boolean;
     };
     HeroesPlayerEntity: {
       hero_id: number;
