@@ -43,6 +43,12 @@ export interface paths {
     /** Возвращает позицию игроков в рейтинке */
     post: operations["TopController_find"];
   };
+  "/api/storage/set": {
+    post: operations["StorageController_set"];
+  };
+  "/api/storage/getAll": {
+    post: operations["StorageController_getAll"];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -175,6 +181,12 @@ export interface components {
       /** Format: date-time */
       created_at: Date;
     };
+    StorageEntity: {
+      /** Format: int64 */
+      account_id: number;
+      value: Record<string, never>;
+      Player?: components["schemas"]["PlayerEntity"];
+    };
     PlayerEntity: {
       /** Format: int64 */
       account_id: number;
@@ -188,6 +200,7 @@ export interface components {
       /** Format: date-time */
       info_uptated_at: Date;
       PlayerMatches: components["schemas"]["PlayerMatchesEntity"][][];
+      Storage?: components["schemas"]["StorageEntity"] | null;
     };
     PlayerMatchesEntity: {
       Match?: components["schemas"]["MatchEntity"];
@@ -338,6 +351,30 @@ export interface components {
       account_id: number;
       rank: number;
     };
+    SetStorageDto: {
+      account_id: number;
+      value: {
+        ui__flip?: boolean;
+        feedback__show_after_date?: number;
+        feedback__show_disable?: boolean;
+      };
+    };
+    SetStorageEntity: {
+      ui__flip?: boolean;
+      feedback__show_after_date?: number;
+      feedback__show_disable?: boolean;
+    };
+    GetAllStorageDto: {
+      ids: number[];
+    };
+    GetAllStorageEntity: {
+        account_id: number;
+        value: {
+          ui__flip?: boolean;
+          feedback__show_after_date?: number;
+          feedback__show_disable?: boolean;
+        };
+      }[];
   };
   responses: never;
   parameters: never;
@@ -492,6 +529,34 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["PlayersRankEntity"][];
+        };
+      };
+    };
+  };
+  StorageController_set: {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SetStorageDto"];
+      };
+    };
+    responses: {
+      200: {
+        content: {
+          "application/json": components["schemas"]["SetStorageEntity"];
+        };
+      };
+    };
+  };
+  StorageController_getAll: {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["GetAllStorageDto"];
+      };
+    };
+    responses: {
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetAllStorageEntity"];
         };
       };
     };
