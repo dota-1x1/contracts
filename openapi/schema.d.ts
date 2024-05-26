@@ -355,14 +355,14 @@ export interface components {
       account_id: number;
       value: {
         ui__flip?: boolean;
-        feedback__show_after_date?: number;
-        feedback__show_disable?: boolean;
+        feedback__start_date_for_remind?: number;
+        feedback__already_done?: boolean;
       };
     };
     SetStorageEntity: {
       ui__flip?: boolean;
-      feedback__show_after_date?: number;
-      feedback__show_disable?: boolean;
+      feedback__start_date_for_remind?: number;
+      feedback__already_done?: boolean;
     };
     GetAllStorageDto: {
       ids: number[];
@@ -371,8 +371,8 @@ export interface components {
         account_id: number;
         value: {
           ui__flip?: boolean;
-          feedback__show_after_date?: number;
-          feedback__show_disable?: boolean;
+          feedback__start_date_for_remind?: number;
+          feedback__already_done?: boolean;
         };
       }[];
   };
