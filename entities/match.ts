@@ -23,6 +23,7 @@ export const MatchCreateSchema = z.object({
   is_party:         z.boolean(),
   win_trigger:      DotaWinTriggerSchema,
   game_mode:        DotaGameModeSchema,
+  tags:              z.string().array().optional(),
   //
   towers: TowersSchema,
 });
