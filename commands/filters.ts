@@ -6,7 +6,7 @@ import {
 } from '../dota';
 
 // DTO для фильтрации матчей
-export const MatchesFilter = z.object({
+export const MatchesFilterSchema = z.object({
   game_mode: DotaGameModeSchema.optional(),
   win_trigger: DotaWinTriggerSchema.optional(),
   limit: z.number().or(z.string()).optional(),
@@ -15,3 +15,5 @@ export const MatchesFilter = z.object({
   team: DotaPlayersTeamSchema.optional(),
   win: z.boolean().optional(),
 });
+
+export type MatchesFilterType = z.infer<typeof MatchesFilterSchema>;
