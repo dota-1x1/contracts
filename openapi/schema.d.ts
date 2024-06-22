@@ -22,6 +22,9 @@ export interface paths {
   "/api/players/{id}/recentMatches": {
     get: operations["PlayerController_recentMatches"];
   };
+  "/api/players/{id}/matches": {
+    get: operations["PlayerController_matches"];
+  };
   "/api/players/{id}/heroes": {
     get: operations["PlayerController_heroes"];
   };
@@ -32,12 +35,6 @@ export interface paths {
   "/api/matches/latest": {
     /** Возвращает список недавно сыграных матчей */
     post: operations["MatchesController_allMatches"];
-  };
-  "/api/matches/byTag": {
-    post: operations["MatchesController_getByTag"];
-  };
-  "/api/matches/addTag": {
-    post: operations["MatchesController_addTagInMatch"];
   };
   "/api/rank/top-10": {
     get: operations["TopController_top10"];
@@ -79,7 +76,6 @@ export interface components {
         win_trigger: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
         /** @enum {string} */
         game_mode: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
-        tags?: string[];
         towers: {
           radiant: {
             max_health: number;
@@ -177,7 +173,6 @@ export interface components {
       /** @enum {string} */
       game_mode: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
       is_party: boolean;
-      tags: string[];
       towers: Record<string, never>;
       players?: components["schemas"]["PlayerMatchesEntity"][];
       /** Format: date-time */
@@ -329,7 +324,6 @@ export interface components {
       /** Format: date-time */
       created_at: Date;
       is_party: boolean;
-      tags: string[];
     };
     HeroesPlayerEntity: {
       hero_id: number;
@@ -338,18 +332,6 @@ export interface components {
       total: number;
       /** Format: date-time */
       last_match: Date;
-    };
-    GetByTagDto: {
-      tag: string;
-      take?: number;
-    };
-    AddTagInMathcDto: {
-      match_id: number;
-      tag: string;
-    };
-    AddTagInMathcEntity: {
-      match_id: number;
-      tags: string[];
     };
     PlayersRankDto: {
       ids: number[];
@@ -445,6 +427,26 @@ export interface operations {
       };
     };
   };
+  PlayerController_matches: {
+    parameters: {
+      query?: {
+        game_mode?: "SF_ONLY" | "ALL_PICK" | "BALANCED_DRAFT";
+        win_trigger?: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
+        team?: "RADIANT" | "DIRE";
+        win?: boolean;
+      };
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      200: {
+        content: {
+          "application/json": components["schemas"]["ShortMatchesEntity"][];
+        };
+      };
+    };
+  };
   PlayerController_heroes: {
     parameters: {
       path: {
@@ -480,34 +482,6 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["ShortMatchesEntity"][];
-        };
-      };
-    };
-  };
-  MatchesController_getByTag: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GetByTagDto"];
-      };
-    };
-    responses: {
-      200: {
-        content: {
-          "application/json": components["schemas"]["ShortMatchesEntity"][];
-        };
-      };
-    };
-  };
-  MatchesController_addTagInMatch: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AddTagInMathcDto"];
-      };
-    };
-    responses: {
-      200: {
-        content: {
-          "application/json": components["schemas"]["AddTagInMathcEntity"];
         };
       };
     };
