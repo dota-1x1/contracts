@@ -34,6 +34,11 @@ export const Responst_EndSchema = z.object({
     .object({
       current: z.number(),
       different: z.number(),
+      details: z.object({
+        base: z.number(),
+        winStreakBonus: z.number(),
+        breakStreakBonus: z.number(),
+      }),
     })
     .array()
     .length(2),
