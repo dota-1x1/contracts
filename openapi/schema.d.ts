@@ -46,6 +46,9 @@ export interface paths {
     /** Возвращает позицию игроков в рейтинке */
     post: operations["TopController_find"];
   };
+  "/api/dev/fix-rating": {
+    get: operations["DevController_fixRating"];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -439,6 +442,11 @@ export interface operations {
         win_trigger?: "KILLS" | "TOWER" | "GIVE_UP" | "DISCONNECT";
         team?: "RADIANT" | "DIRE";
         win?: boolean;
+        is_party?: boolean;
+        hero_id?: number;
+        region?: number;
+        against_hero_id?: number;
+        against_account_id?: number;
       };
       path: {
         id: number;
@@ -521,6 +529,13 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["PlayersRankEntity"][];
         };
+      };
+    };
+  };
+  DevController_fixRating: {
+    responses: {
+      200: {
+        content: never;
       };
     };
   };
