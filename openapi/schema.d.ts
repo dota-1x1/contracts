@@ -533,6 +533,11 @@ export interface operations {
     };
   };
   DevController_fixRating: {
+    parameters: {
+      query: {
+        pass: string;
+      };
+    };
     responses: {
       200: {
         content: never;

@@ -38,6 +38,7 @@ export const Responst_EndSchema = z.object({
         base: z.number(),
         winStreakBonus: z.number(),
         breakStreakBonus: z.number(),
+        winStrongPlayer: z.number(),
       }),
     })
     .array()
