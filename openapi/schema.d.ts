@@ -159,6 +159,7 @@ export interface components {
             base: number;
             winStreakBonus: number;
             breakStreakBonus: number;
+            winStrongPlayer: number;
           };
         }[];
     };
