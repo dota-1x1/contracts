@@ -18,6 +18,7 @@ export const PlayerMatchesCreateSchema = z.object({
   account_id: z.number().or(z.bigint()),
   team: DotaPlayersTeamSchema,
   hero_id: z.number(),
+  hero_variant: z.number(),
   hero_has_randomed: z.boolean(),
   // предметы
   item_0: z.number(),

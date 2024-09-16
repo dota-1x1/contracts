@@ -95,6 +95,7 @@ export interface components {
           /** @enum {string} */
           team: "RADIANT" | "DIRE";
           hero_id: number;
+          hero_variant: number;
           hero_has_randomed: boolean;
           item_0: number;
           item_1: number;
@@ -214,6 +215,8 @@ export interface components {
       rating_change: number;
       /** Format: int32 */
       hero_id: number;
+      /** Format: int32 */
+      hero_variant: number;
       hero_has_randomed: boolean;
       /** Format: int32 */
       item_0: number;
@@ -310,6 +313,7 @@ export interface components {
       /** Format: int64 */
       account_id: number;
       hero_id: number;
+      hero_variant: number;
       level: number;
       xp_total: number;
       denies: number;
