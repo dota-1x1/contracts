@@ -37,17 +37,20 @@ export interface paths {
     post: operations["MatchesController_allMatches"];
   };
   "/api/rank/top-10": {
+    /** @deprecated */
     get: operations["TopController_top10"];
   };
   "/api/rank/top-50": {
+    /** @deprecated */
     get: operations["TopController_top50"];
+  };
+  "/api/rank/top/{count}": {
+    /** Возвращает список лидеров по рейтингу (всех и активных) */
+    get: operations["TopController_topNew"];
   };
   "/api/rank/players": {
     /** Возвращает позицию игроков в рейтинке */
     post: operations["TopController_find"];
-  };
-  "/api/dev/fix-rating": {
-    get: operations["DevController_fixRating"];
   };
 }
 
@@ -346,6 +349,21 @@ export interface components {
       /** Format: date-time */
       last_match: Date;
     };
+    PlayerEntityWithoutMatches: {
+      /** Format: int64 */
+      account_id: number;
+      /** Format: int32 */
+      rating: number;
+      avatar_full: string | null;
+      avatar_medium: string | null;
+      avatar_small: string | null;
+      profile_url: string | null;
+      profile_name: string | null;
+    };
+    ActiveTopEntity: {
+      all: components["schemas"]["PlayerEntityWithoutMatches"][];
+      active_players: components["schemas"]["PlayerEntityWithoutMatches"][];
+    };
     PlayersRankDto: {
       ids: number[];
     };
@@ -504,6 +522,7 @@ export interface operations {
       };
     };
   };
+  /** @deprecated */
   TopController_top10: {
     responses: {
       200: {
@@ -513,11 +532,28 @@ export interface operations {
       };
     };
   };
+  /** @deprecated */
   TopController_top50: {
     responses: {
       200: {
         content: {
           "application/json": components["schemas"]["PlayerEntity"][];
+        };
+      };
+    };
+  };
+  /** Возвращает список лидеров по рейтингу (всех и активных) */
+  TopController_topNew: {
+    parameters: {
+      path: {
+        /** @description Количество игроков (1-50) */
+        count: number;
+      };
+    };
+    responses: {
+      200: {
+        content: {
+          "application/json": components["schemas"]["ActiveTopEntity"];
         };
       };
     };
@@ -534,18 +570,6 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["PlayersRankEntity"][];
         };
-      };
-    };
-  };
-  DevController_fixRating: {
-    parameters: {
-      query: {
-        pass: string;
-      };
-    };
-    responses: {
-      200: {
-        content: never;
       };
     };
   };
