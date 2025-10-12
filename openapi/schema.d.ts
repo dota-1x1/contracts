@@ -44,7 +44,7 @@ export interface paths {
     /** @deprecated */
     get: operations["TopController_top50"];
   };
-  "/api/rank/top/{count}": {
+  "/api/rank/top": {
     /** Возвращает список лидеров по рейтингу (всех и активных) */
     get: operations["TopController_topNew"];
   };
@@ -349,7 +349,7 @@ export interface components {
       /** Format: date-time */
       last_match: Date;
     };
-    PlayerEntityWithoutMatches: {
+    PlayerEntityInTop: {
       /** Format: int64 */
       account_id: number;
       /** Format: int32 */
@@ -361,8 +361,8 @@ export interface components {
       profile_name: string | null;
     };
     ActiveTopEntity: {
-      all: components["schemas"]["PlayerEntityWithoutMatches"][];
-      active_players: components["schemas"]["PlayerEntityWithoutMatches"][];
+      all: components["schemas"]["PlayerEntityInTop"][];
+      active_players: components["schemas"]["PlayerEntityInTop"][];
     };
     PlayersRankDto: {
       ids: number[];
@@ -545,8 +545,8 @@ export interface operations {
   /** Возвращает список лидеров по рейтингу (всех и активных) */
   TopController_topNew: {
     parameters: {
-      path: {
-        /** @description Количество игроков (1-50) */
+      query: {
+        /** @description Количество игроков (5-50) */
         count: number;
       };
     };
