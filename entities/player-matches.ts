@@ -15,7 +15,7 @@ const StartedItemsSchema = z.object({
 });
 
 export const PlayerMatchesCreateSchema = z.object({
-  account_id: z.number().or(z.bigint()),
+  account_id: z.number().min(1).or(z.bigint().min(1n)),
   team: DotaPlayersTeamSchema,
   hero_id: z.number(),
   hero_variant: z.number(),
