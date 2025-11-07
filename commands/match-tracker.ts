@@ -11,7 +11,7 @@ export type StartType = z.infer<typeof StartSchema>;
 
 export const Responst_StartSchema = z.array(
   z.object({
-    account_id: z.number().or(z.bigint()),
+    account_id: z.number().min(1).or(z.bigint().min(1n)),
     rating: z.number(),
   })
 );
